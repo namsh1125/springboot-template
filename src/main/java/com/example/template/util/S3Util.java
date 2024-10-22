@@ -46,6 +46,7 @@ public class S3Util implements ObjectStorageUtil {
             s3.putObject(putObjectRequest);
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("Failed to upload file");
         }
 
