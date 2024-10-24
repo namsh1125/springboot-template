@@ -22,6 +22,11 @@ public class S3Util implements ObjectStorageUtil {
 
     @Override
     public String upload(MultipartFile file) {
+        return upload(file, "");
+    }
+
+    @Override
+    public String upload(MultipartFile file, String directory) {
         // 입력받은 파일이 비어있는 지 확인
         if (file.isEmpty() || Objects.isNull(file.getOriginalFilename())) {
             throw new IllegalArgumentException("File is empty");
@@ -29,7 +34,7 @@ public class S3Util implements ObjectStorageUtil {
 
         // 파일 이름 변경 (중복된 파일 이름을 방지하기 위해)
         String originalFilename = file.getOriginalFilename();
-        String newFilename = System.currentTimeMillis() + "_" + originalFilename; // FIXME: 요구사항에 맞게 파일 이름 변경
+        String newFilename = directory + "/" + System.currentTimeMillis() + "_" + originalFilename; // FIXME: 요구사항에 맞게 파일 이름 변경
 
         // 파일 메타데이터 설정
         ObjectMetadata objectMetadata = new ObjectMetadata();
