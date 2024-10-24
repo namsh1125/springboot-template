@@ -18,7 +18,7 @@ public class FileController {
 
     @PostMapping
     public ResponseEntity<?> s3Upload(@RequestPart MultipartFile file){
-        String profileImage = fileService.upload(file);
-        return ResponseEntity.ok(profileImage);
+        String url = fileService.upload(file);
+        return ResponseEntity.ok(url);
     }
 }
